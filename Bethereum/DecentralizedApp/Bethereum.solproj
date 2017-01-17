@@ -10,7 +10,7 @@
     <BlockchainServiceUrl>http://localhost:8000/</BlockchainServiceUrl>
     <BlockchainUser>testuser</BlockchainUser>
     <BlockchainPassword>testing</BlockchainPassword>
-    <Name>DecentralizedApp</Name>
+    <Name>Bethereum</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +23,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Contracts\Bethereum-V1.sol">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="samples\Payout.sol" />
     <Content Include="samples\SimpleDataFeed.sol" />
     <Content Include="samples\SimpleStorage.sol" />
@@ -31,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="Contracts" />
     <Folder Include="samples\" />
     <Folder Include="src\" />
   </ItemGroup>

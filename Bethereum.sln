@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{409E77C4-F3CC-4F9C-8797-CB71EF4C8AE4}") = "DecentralizedApp", "Bethereum\DecentralizedApp\DecentralizedApp.solproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
+Project("{409E77C4-F3CC-4F9C-8797-CB71EF4C8AE4}") = "Bethereum", "Bethereum\DecentralizedApp\Bethereum.solproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
