@@ -10,6 +10,7 @@ contract Payout {
        Jim    = 0xccdd;
        Kieren = 0xeeff;
 
+
        ownershipDistribution[Victor] = 35;
        ownershipDistribution[Jim]  = 35;
        ownershipDistribution[Kieren] = 30;
