@@ -23,10 +23,10 @@ contract RouteCoin {
     enum State { Created, Expired, Completed, Aborted }
     State public state;
 
-    function RouteCoin(address _finalDestination, uint _contractStartTime, uint _contractGracePeriod, uint _contractPrice) {
+    function RouteCoin(address _finalDestination, uint _contractGracePeriod, uint _contractPrice) {
         buyer = msg.sender;
+        contractStartTime = now;        
         finalDestination = _finalDestination;
-        contractStartTime = _contractStartTime;
         contractGracePeriod = _contractGracePeriod;
         contractPrice = _contractPrice;
     }
@@ -47,7 +47,7 @@ contract RouteCoin {
     }
 
     modifier expired() {
-        if (now < _contractStartTime + _contractGracePeriod) throw;
+        if (now < contractStartTime + contractGracePeriod) throw;
         _;
     }
 
@@ -56,23 +56,8 @@ contract RouteCoin {
         _;
     }
 
-    event aborted();
-    event routeFound();
-    event routeAccepted();
-
-    function abort()
-        onlyBuyer // only buyer can abort the contract
-        inState(State.Created)
-    {
-        aborted();
-        state = State.Aborted;
-        //if (!buyer.send(this.balance))
-        //    throw;
-    }
-
     function foundDestinationAddress()
-        onlySeller
-        expired
+        expired // contract must be in the Created state to be able to foundDestinationAddress
         inState(State.Created)
         payable
     {
@@ -80,15 +65,28 @@ contract RouteCoin {
         routeFound();
     }
 
-    /// Confirm that you (the buyer) received the item.
-    /// This will release the locked ether.
+
     function confirmPurchase()
-        onlyBuyer
-        inState(State.Created)
+        onlyBuyer  // only buyer can confirm the working route 
+        inState(State.Created)  // contract must be in the Created state to be able to confirmPurchase
     {
         routeAccepted();
         state = State.Completed;
         if (!buyer.send(contractPrice))
             throw;
     }
+
+    function abort()
+        onlyBuyer // only buyer can abort the contract
+        inState(State.Created)  // contract must be in the Created state to be able to abort
+    {
+        aborted();
+        state = State.Aborted;
+    }
+
+    // Events
+    event aborted();
+    event routeFound();
+    event routeAccepted();
+
 }
