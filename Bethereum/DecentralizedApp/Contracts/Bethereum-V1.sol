@@ -18,16 +18,18 @@ contract RouteCoin {
 
     // The contract prize amount. 
     // Q: will this be with Ethers or we create a coin called RouteCoin?
-    uint public contractPrize;
+    uint public contractPrice;
     
     enum State { Created, Expired, Completed, Aborted }
     State public state;
 
-    //function Purchase() payable {
-    //    seller = msg.sender;
-    //value = msg.contractPrize / 2;  // transfer half of fee
-    //if (2 * value != msg.value) throw;
-    //}
+    function RouteCoin(address _finalDestination, uint _contractStartTime, uint _contractGracePeriod, uint _contractPrice) {
+        buyer = msg.sender;
+        finalDestination = _finalDestination;
+        contractStartTime = _contractStartTime;
+        contractGracePeriod = _contractGracePeriod;
+        contractPrice = _contractPrice;
+    }
 
     modifier require(bool _condition) {
         if (!_condition) throw;
@@ -44,12 +46,16 @@ contract RouteCoin {
         _;
     }
 
+    modifier expired() {
+        if (now < _contractStartTime + _contractGracePeriod) throw;
+        _;
+    }
+
     modifier inState(State _state) {
         if (state != _state) throw;
         _;
     }
 
-    event expired();
     event aborted();
     event routeFound();
     event routeAccepted();
@@ -64,18 +70,14 @@ contract RouteCoin {
         //    throw;
     }
 
-    /// Confirm the purchase as buyer.
-    /// Transaction has to include `2 * value` ether.
-    /// The ether will be locked until confirmReceived
-    /// is called.
     function foundDestinationAddress()
         onlySeller
+        expired
         inState(State.Created)
         payable
     {
+        seller = msg.sender;
         routeFound();
-        buyer = msg.sender;
-        //state = State.Locked;
     }
 
     /// Confirm that you (the buyer) received the item.
@@ -86,7 +88,7 @@ contract RouteCoin {
     {
         routeAccepted();
         state = State.Completed;
-        if (!buyer.send(contractPrize))
+        if (!buyer.send(contractPrice))
             throw;
     }
 }
