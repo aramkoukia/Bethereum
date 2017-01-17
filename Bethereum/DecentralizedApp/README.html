@@ -1,0 +1,67 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>BlockApps.net Visual Studio README</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <h1>Solidity Distributed BlockChain Application</h1>
+
+        <h2>Install bloc</h2>
+        
+        <p>Download from npm</p>
+        
+        <p>`npm install blockapps-bloc`</p>
+        
+        <h2>Initialize a project</h2>
+        
+        <pre>bloc init</pre>
+        
+        <h2>Install npm dependencies</h2>
+        
+        <pre>cd app_name &amp;&amp; npm install</pre>
+        
+        <h2>Generate a key</h2>
+        
+        <pre>bloc genkey</pre>
+        
+        <p>You will see an out put something like <pre>app/users/admin/6f29e2b2b6b922800fd959a94b88cd305790413a.json</pre></p>
+        
+        <p>Remember the username and password, you will need to enter this in visual studio.</p>
+
+        <h2>Run Your local bloc keyserver</h2>
+
+        <pre>bloc start</pre>
+
+        <p>bloc should now be listening on localhost:8000</p>
+
+        <h2>Create a distributed application in Visual Studio</h2>
+        <ul>
+            <li> Click new project</li>
+            <li> From the template select `Solidity` &amp; DecentralizedApplication</li>
+            <li> Navigate to the Solution Explorer and right click on your project</li>
+            <li> Select Properties</li>
+            <li> Enter the password you used with the `bloc genkey` command in the BlockchainPassword field</li>
+            <li> Click apply</li>
+        </ul>
+
+        <h2>Compile and deploy your first smart contract</h2>
+
+        <ul>
+            <li>In Visual Studio in `samples` right click one of the `.sol` files and click `compile`</li>
+            <li>Now right click and click `deploy`</li>
+            <li>You should see your browser open with generated html page based on the methods in the solidity contract</li>
+            <li>If you do not look in the visual studio console and you will see a link to the deployed contract</li>
+            <li>Click this link and you will see and generated html page based on the methods in the contract</li>
+        </ul>
+
+    </body>
+</html>
