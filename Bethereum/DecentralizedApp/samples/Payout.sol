@@ -1,3 +1,5 @@
+pragma solidity ^0.4.0;
+
 contract Payout {
      address Victor;
      address Jim;
@@ -18,8 +20,11 @@ contract Payout {
 
      function Dividend() {
        uint bal= this.balance;
-       Victor.send(bal * ownershipDistribution[Victor] / 100); 
-       Jim.send(bal * ownershipDistribution[Jim] / 100);
-       Kieren.send(bal * ownershipDistribution[Kieren] / 100);
+       if(!Victor.send(bal * ownershipDistribution[Victor] / 100))
+          throw;
+       if(!Jim.send(bal * ownershipDistribution[Jim] / 100))
+          throw;
+       if(!Kieren.send(bal * ownershipDistribution[Kieren] / 100))
+          throw;
      }
 }

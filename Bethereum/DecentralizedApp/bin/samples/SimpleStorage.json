@@ -1,0 +1,20 @@
+{
+    "abi": "[{\"constant\":false,\"inputs\":[{\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"set\",\"outputs\":[],\"payable\":false,\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"retVal\",\"type\":\"uint256\"}],\"payable\":false,\"type\":\"function\"}]\n",
+    "bytecode": "6060604052604b8060106000396000f3606060405260e060020a600035046360fe47b1811460265780636d4ce63c146032575b6002565b34600257600435600055005b3460025760005460408051918252519081900360200190f3",
+    "functionHashes": {
+        "get()": "6d4ce63c",
+        "set(uint256)": "60fe47b1"
+    },
+    "gasEstimates": {
+        "creation": [
+            45,
+            15000
+        ],
+        "external": {
+            "get()": 213,
+            "set(uint256)": 20102
+        },
+        "internal": {}
+    },
+    "runtimeBytecode": "606060405260e060020a600035046360fe47b1811460265780636d4ce63c146032575b6002565b34600257600435600055005b3460025760005460408051918252519081900360200190f3"
+}
