@@ -2,26 +2,26 @@ pragma solidity ^0.4.0;
 
 contract RouteCoin {
     // The public key of the buyer. Reza: we need to hash this.
-    address public buyer;   
+    address private buyer;   
 
-    address public seller;
+    address private seller;
 
     // Q: is this a Wallet address? an IP address? 
     // The destination of RREQ
-    address public finalDestination;  
+    address private finalDestination;  
 
     // The deadline when the contract will end automatically
-    uint public contractStartTime;
+    uint private contractStartTime;
 
     // The duration of the contract will end automatically
-    uint public contractGracePeriod;
+    uint private contractGracePeriod;
 
     // The contract prize amount. 
     // Q: will this be with Ethers or we create a coin called RouteCoin?
-    uint public contractPrice;
+    uint private contractPrice;
     
     enum State { Created, Expired, Completed, Aborted }
-    State public state;
+    State private state;
 
     function RouteCoin(address _finalDestination, uint _contractGracePeriod, uint _contractPrice) {
         buyer = msg.sender;
@@ -56,19 +56,19 @@ contract RouteCoin {
         _;
     }
 
-    function foundDestinationAddress()
+    function destinationAddressRouteFound()
         expired // contract must be in the Created state to be able to foundDestinationAddress
         inState(State.Created)
-        payable
     {
         seller = msg.sender;
         routeFound();
     }
 
 
-    function confirmPurchase()
+    function destinationAddressRouteConfirmed()
         onlyBuyer  // only buyer can confirm the working route 
         inState(State.Created)  // contract must be in the Created state to be able to confirmPurchase
+        payable
     {
         routeAccepted();
         state = State.Completed;
