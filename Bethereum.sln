@@ -5,16 +5,30 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{409E77C4-F3CC-4F9C-8797-CB71EF4C8AE4}") = "Bethereum", "Bethereum\DecentralizedApp\Bethereum.solproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RouteCoinSimulation", "RouteCoinSimulation\RouteCoinSimulation.csproj", "{4C4E0F70-FE09-413D-8F89-FBCE068E27C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|x86.ActiveCfg = Debug|x86
 		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|x86.Build.0 = Debug|x86
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.ActiveCfg = Release|x86
 		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|x86.ActiveCfg = Release|x86
 		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|x86.Build.0 = Release|x86
+		{4C4E0F70-FE09-413D-8F89-FBCE068E27C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C4E0F70-FE09-413D-8F89-FBCE068E27C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C4E0F70-FE09-413D-8F89-FBCE068E27C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4C4E0F70-FE09-413D-8F89-FBCE068E27C3}.Debug|x86.Build.0 = Debug|Any CPU
+		{4C4E0F70-FE09-413D-8F89-FBCE068E27C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C4E0F70-FE09-413D-8F89-FBCE068E27C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C4E0F70-FE09-413D-8F89-FBCE068E27C3}.Release|x86.ActiveCfg = Release|Any CPU
+		{4C4E0F70-FE09-413D-8F89-FBCE068E27C3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
