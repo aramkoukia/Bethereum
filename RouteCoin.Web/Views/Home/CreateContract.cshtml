@@ -1,0 +1,42 @@
+﻿@model RouteCoin.Web.Models.RouteCoinContractModel
+<div class="panel panel-primary">
+    <div class="panel-heading">Create Contract</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-8">
+                @using (Html.BeginForm("CreateContract", "Home", FormMethod.Post))
+                {
+                    <h3>Buyer Account Information:</h3>
+                    <div class="form-group">
+                        <label for="SellerPublicKey">Buyer's Public Key</label>
+                        @Html.TextBoxFor(model => model.BuyerPublicKey, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="BuyerAccountPassword">Password</label>
+                        @Html.PasswordFor(model => model.BuyerAccountPassword, new { @class = "form-control" })
+                    </div>
+
+                    <hr />
+
+                    <h3>Contract Information:</h3>
+                    <div class="form-group">
+                        <label for="DestinationAddress">Destination Address</label>
+                        @Html.TextBoxFor(model => model.DestinationAddress, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ContractPrice">Contract Price</label>
+                        @Html.TextBoxFor(model => model.ContractPrice, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ContractGracePeriod">Contract Grace Period (Minutes)</label>
+                        @Html.TextBoxFor(model => model.ContractGracePeriod, new { @class = "form-control" })
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Create Contract</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

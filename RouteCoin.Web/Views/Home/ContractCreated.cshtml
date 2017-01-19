@@ -1,0 +1,29 @@
+﻿@model RouteCoin.Web.Models.ContractCreatedModel
+ 
+<br />
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Contract Information</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    <b>Transaction Hash:</b> 
+                    <br /> 
+                    @Model.TransactionHash
+                </p>
+                <p>
+                    <b>Contract Address:</b> 
+                    <br /> 
+                    @Model.ContractAddress
+                </p>
+                <p>
+                    <b>Ether Scan Url:</b>
+                    <br />
+                    <a href="https://testnet.etherscan.io/address/@Model.ContractAddress" target="_blank">https://testnet.etherscan.io/address/@Model.ContractAddress</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>

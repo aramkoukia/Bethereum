@@ -10,3 +10,7 @@
 /RouteCoinSimulation/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
 /RouteCoinSimulation/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 /RouteCoinSimulation/obj/Debug
+/packages
+/RouteCoin.Web/bin/roslyn
+/RouteCoin.Web/bin
+/RouteCoin.Web/obj/Debug
