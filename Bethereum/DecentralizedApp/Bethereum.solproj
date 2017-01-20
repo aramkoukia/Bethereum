@@ -26,17 +26,10 @@
     <Content Include="Contracts\Bethereum-V1.sol">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="samples\Payout.sol" />
-    <Content Include="samples\SimpleDataFeed.sol" />
-    <Content Include="samples\SimpleStorage.sol" />
-    <Content Include="README.html" />
-    <Content Include="src\README.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="Contracts" />
-    <Folder Include="samples\" />
-    <Folder Include="src\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build">
