@@ -1,4 +1,5 @@
-﻿using Nethereum.Web3;
+﻿using Nethereum.ABI.FunctionEncoding;
+using Nethereum.Web3;
 using RouteCoin.Web.Models;
 using RouteCoin.Web.Services;
 using System;
@@ -28,19 +29,18 @@ namespace RouteCoin.Web.Controllers
             var web3 = new Web3(ipcClient);
 
             var gas = new Nethereum.Hex.HexTypes.HexBigInteger(300000);
+            var balance = new Nethereum.Hex.HexTypes.HexBigInteger(120);
             var accountUnlockTime = new Nethereum.Hex.HexTypes.HexBigInteger(120);
 
             // Unlock the caller's account with the given password
             var unlockResult = await web3.Personal.UnlockAccount.SendRequestAsync(model.BuyerPublicKey, model.BuyerAccountPassword, accountUnlockTime);
 
-            var transactionHash = await web3.Eth.DeployContract.SendRequestAsync(_abi, _byteCode, model.BuyerPublicKey, gas, model.DestinationAddress, model.ContractGracePeriod, model.ContractPrice);
-
-
+            var transactionHash = await web3.Eth.DeployContract.SendRequestAsync(_abi, _byteCode, model.BuyerPublicKey, gas, balance, model.DestinationAddress, model.ContractGracePeriod, model.ContractPrice);
 
             return RedirectToAction("ContractCreated", new { transactionHash = transactionHash });
         }
 
-        public async Task<ActionResult> ContractCreated(string transactionHash, string contractAddress)
+        public async Task<ActionResult> ContractCreated(string fromAddress, string transactionHash, string contractAddress)
         {
             if (string.IsNullOrEmpty(contractAddress))
             {
@@ -51,7 +51,7 @@ namespace RouteCoin.Web.Controllers
                     contractAddress = reciept.ContractAddress;
             }
 
-            return View(new ContractCreatedModel() { TransactionHash = transactionHash, ContractAddress = contractAddress });
+            return View(new ContractCreatedModel() { TransactionHash = transactionHash, ContractAddress = contractAddress, FromAddress = fromAddress });
         }
 
         public async Task<ActionResult> WhisperContractCreationToNeigboors(string contractAddress)
@@ -73,7 +73,7 @@ namespace RouteCoin.Web.Controllers
             return View(model);
         }
 
-        public async Task<ActionResult> ContractDetails(string transactionHash)
+        public async Task<ActionResult> ContractDetails(string transactionHash, string fromAddress)
         {
             var ipcClient = new Nethereum.JsonRpc.IpcClient.IpcClient(_getAddress);
             var web3 = new Web3(ipcClient);
@@ -93,7 +93,8 @@ namespace RouteCoin.Web.Controllers
                 ContractBalance = "0",
                 ContractPrice = "10",
                 DestinationAddress = "0xblahblah",
-                State = "Created"
+                State = "Created",
+                FromAddress = fromAddress
             };
             return View(model);
         }
@@ -105,6 +106,7 @@ namespace RouteCoin.Web.Controllers
             var contract = web3.Eth.GetContract(_abi, contractAddress);
             var abortFunction = contract.GetFunction("getState");
             var result = await abortFunction.CallAsync<int>();
+
             var model = new GetStateViewModel()
             {
                 ContractState = MapToContractStateEnum(result)
@@ -113,13 +115,21 @@ namespace RouteCoin.Web.Controllers
         }
 
 
-        public async Task<ActionResult> Abort(string contractAddress)
+        public async Task<ActionResult> Abort(string senderAddress, string contractAddress)
         {
             var ipcClient = new Nethereum.JsonRpc.IpcClient.IpcClient(_getAddress);
             var web3 = new Web3(ipcClient);
             var contract = web3.Eth.GetContract(_abi, contractAddress);
             var abortFunction = contract.GetFunction("abort");
             var result = await abortFunction.CallAsync<int>();
+
+            // Unlock the caller's account with the given password
+
+            //var unlockResult = await web3.Personal.UnlockAccount.SendRequestAsync(model.BuyerPublicKey, model.BuyerAccountPassword, accountUnlockTime);
+
+            var transactionHash = await abortFunction.SendTransactionAsync(senderAddress);
+            //var await web3.Eth.Transactions.SendTransaction.SendRequestAsync(new Nethereum.RPC.Eth.DTOs.TransactionInput() {   } )
+
             var model = new AbortViewModel()
             {
                 ContractState = MapToContractStateEnum(result)
@@ -161,7 +171,7 @@ namespace RouteCoin.Web.Controllers
         {
             var ipcClient = new Nethereum.JsonRpc.IpcClient.IpcClient(_getAddress);
             var web3 = new Web3(ipcClient);
-            web3.Client.w
+            //web3.Client.w
         }
 
         private string MapToContractStateEnum(int result)

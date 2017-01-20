@@ -11,9 +11,12 @@
                     <label for="SellerPublicKey">Transaction Hash:</label>
                     @Model.TransactionHash
                 </p>
-
                 <p>
-                    @Html.ActionLink("Show Contract Details", "ContractDetails", "Home", new { transactionHash = Model.TransactionHash }, null)
+                    <label for="SellerPublicKey">From Address:</label>
+                    @Model.FromAddress
+                </p>
+                <p>
+                    @Html.ActionLink("Show Contract Details", "ContractDetails", "Home", new { transactionHash = Model.TransactionHash , fromAddress = Model.FromAddress}, null)
                 </p>
             </div>
 

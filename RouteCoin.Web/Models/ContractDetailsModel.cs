@@ -8,6 +8,7 @@ namespace RouteCoin.Web.Models
     public class ContractDetailsModel
     {
         public string TransactionHash { get; set; }
+        public string FromAddress { get; set; }
         public string ContractAddress { get; set; }
         public string ContractBalance { get; set; }
         public string State { get; set; }
