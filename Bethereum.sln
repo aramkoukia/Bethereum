@@ -7,6 +7,8 @@ Project("{409E77C4-F3CC-4F9C-8797-CB71EF4C8AE4}") = "Bethereum", "Bethereum\Dece
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RouteCoin.Web", "RouteCoin.Web\RouteCoin.Web.csproj", "{6B7DCC58-B7C1-4429-BF4A-AD1D25FDE21D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whisper", "Whisper\Whisper.csproj", "{DF3F2596-D025-41C3-AC80-A980376293B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,14 @@ Global
 		{6B7DCC58-B7C1-4429-BF4A-AD1D25FDE21D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6B7DCC58-B7C1-4429-BF4A-AD1D25FDE21D}.Release|x86.ActiveCfg = Release|Any CPU
 		{6B7DCC58-B7C1-4429-BF4A-AD1D25FDE21D}.Release|x86.Build.0 = Release|Any CPU
+		{DF3F2596-D025-41C3-AC80-A980376293B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF3F2596-D025-41C3-AC80-A980376293B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF3F2596-D025-41C3-AC80-A980376293B7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DF3F2596-D025-41C3-AC80-A980376293B7}.Debug|x86.Build.0 = Debug|Any CPU
+		{DF3F2596-D025-41C3-AC80-A980376293B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF3F2596-D025-41C3-AC80-A980376293B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF3F2596-D025-41C3-AC80-A980376293B7}.Release|x86.ActiveCfg = Release|Any CPU
+		{DF3F2596-D025-41C3-AC80-A980376293B7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
 ﻿using Nethereum.ABI.FunctionEncoding;
+using Nethereum.RPC.Shh;
 using Nethereum.Web3;
 using RouteCoin.Web.Models;
 using RouteCoin.Web.Services;
@@ -66,7 +67,7 @@ namespace RouteCoin.Web.Controllers
 
             foreach (var neigboorAddress in neigboors)
             {
-                WhisperContractCreation(contractAddress, neigboorAddress);
+                await WhisperContractCreation(contractAddress, neigboorAddress);
             }
             var model = new WhisperContractCreationViewModel()
             {
@@ -202,10 +203,15 @@ namespace RouteCoin.Web.Controllers
 
         }
 
-        private void WhisperContractCreation(string contractAddress, string neigboorAddress)
+        private async Task WhisperContractCreation(string contractAddress, string neigboorAddress)
         {
             var ipcClient = new Nethereum.JsonRpc.IpcClient.IpcClient(_getAddress);
+            var shh = new ShhNewIdentity(ipcClient);
             var web3 = new Web3(ipcClient);
+            //web3.Shh.NewIdentity();
+            var result = await shh.SendRequestAsync();
+            //shh.SendRequestAsync()
+            shh.BuildRequest().
             //web3.Client.w
         }
 

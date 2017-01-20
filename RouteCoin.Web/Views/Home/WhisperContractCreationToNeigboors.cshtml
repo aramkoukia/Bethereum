@@ -1,5 +1,6 @@
-﻿@model RouteCoin.Web.Models.AbortViewModel
- 
+﻿@model RouteCoin.Web.Models.WhisperContractCreationViewModel
+@using System.Linq;
+
 <br />
 
 <div class="panel panel-primary">
@@ -7,9 +8,65 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
-                <label for="SellerPublicKey">Contract State:</label>
-                @Model.ContractState
+                <label for="SellerPublicKey">Routing Table Addresses:</label>
+                @foreach (var item in Model.Neigboors)
+                {
+                    @item  <br />
+                }
             </div>
         </div>
     </div>
 </div>
+
+<script src="~/Scripts/web3.js"></script>
+<script type="text/javascript">
+
+    var shh = web3.shh;
+    var appName = "My silly app!";
+    var myName = "Gav Would";
+    var myIdentity = '0x04c7813eab0f66dbe61e699c349d813c62269ceb41e3f2f20faf63a77c181dc7ce881344269ad82488f68824eedacf705eb6f9d3e2b1924ef1ae1de803137b1b8d';
+    //    shh.newIdentity(function (error, result) {
+    //    if (!error)
+    //        console.log(result)
+    //    else
+    //        console.error(error);
+    //});
+
+    shh.post({
+        "from": myIdentity,
+        "topic": [web3.fromAscii(appName)],
+        "payload": [web3.fromAscii(myName), web3.fromAscii("What is your name?")],
+        "ttl": 100,
+        "priority": 1000
+    });
+
+    var replyWatch = shh.watch({
+        "topic": [web3.fromAscii(appName), myIdentity],
+        "to": myIdentity
+    });
+    // could be "topic": [ web3.fromAscii(appName), null ] if we wanted to filter all such
+    // messages for this app, but we'd be unable to read the contents.
+
+    replyWatch.arrived(function (m) {
+        // new message m
+        console.log("Reply from " + web3.toAscii(m.payload) + " whose address is " + m.from);
+    });
+
+    var broadcastWatch = shh.watch({ "topic": [web3.fromAscii(appName)] });
+    broadcastWatch.arrived(function (m) {
+        if (m.from != myIdentity) {
+            // new message m: someone's asking for our name. Let's tell them.
+            var broadcaster = web3.toAscii(m.payload).substr(0, 32);
+            console.log("Broadcast from " + broadcaster + "; replying to tell them our name.");
+            shh.post({
+                "from": eth.key,
+                "to": m.from,
+                "topics": [eth.fromAscii(appName), m.from],
+                "payload": [eth.fromAscii(myName)],
+                "ttl": 2,
+                "priority": 500
+            });
+        }
+    });
+
+</script>

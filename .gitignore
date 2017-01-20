@@ -14,3 +14,7 @@
 /RouteCoin.Web/bin/roslyn
 /RouteCoin.Web/bin
 /RouteCoin.Web/obj/Debug
+/Whisper/.vs/Whisper/v14
+/Whisper/bin/Debug
+/Whisper/obj/Debug
+/Whisper/packages

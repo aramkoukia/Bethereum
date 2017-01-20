@@ -51,6 +51,12 @@
                 @Html.ActionLink("Destination Address Route Confirmed", "DestinationAddressRouteConfirmed", "Home", new { contractAddress = Model.ContractAddress }, null)
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.ActionLink("Whisper Contract Address to Routing Table addresses", "WhisperContractCreationToNeigboors", "Home", new { contractAddress = Model.ContractAddress }, null)
+            </div>
+        </div>
+
     </div>
 </div>
 
