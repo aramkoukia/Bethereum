@@ -3,12 +3,40 @@
 <br />
 
 <div class="panel panel-primary">
-    <div class="panel-heading">Abort</div>
+    <div class="panel-heading">Route Confirmed Transaction</div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-6">
-                <label for="SellerPublicKey">Contract State:</label>
-                @Model.ContractState
+            <div class="col-md-8">
+                @using (Html.BeginForm("PostDestinationAddressRouteConfirmed", "Home", FormMethod.Post))
+                {
+                    <h3>Buyer Account Information:</h3>
+                    <div class="form-group">
+                        <label for="CallerAddress">Caller's Public Key</label>
+                        @Html.TextBoxFor(model => model.CallerAddress, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="CallerPassword">Caller's Password</label>
+                        @Html.PasswordFor(model => model.CallerPassword, new { @class = "form-control" })
+                    </div>
+
+                    <hr />
+
+                    <h3>Contract Information:</h3>
+                    <div class="form-group">
+                        <label for="ContractAddress">Contract Address</label>
+                        @Html.TextBoxFor(model => model.ContractAddress, new { @class = "form-control" })
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Submit Route Confrimed Transaction</button>
+                }
+
+                <hr />
+
+                <label for="TransactionHash">TransactionHash</label>
+                @Model.TransactionHash
+
+                <br />
+                @Model.Message
             </div>
         </div>
     </div>

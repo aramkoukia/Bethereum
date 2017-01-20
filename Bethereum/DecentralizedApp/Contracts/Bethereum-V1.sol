@@ -21,7 +21,7 @@ contract RouteCoin {
     uint private contractPrice;
     
     enum State { Created, Expired, Completed, Aborted, RouteFound }
-    State private state;
+    State public state;
 
     function RouteCoin(address _finalDestination, uint _contractGracePeriod, uint _contractPrice) {
         buyer = msg.sender;
@@ -76,8 +76,8 @@ contract RouteCoin {
     {
         routeAccepted();
         state = State.Completed;
-        //if (!buyer.send(contractPrice))
-        //    throw;
+        if (!buyer.send(contractPrice))
+            throw;
         return state;
     }
 

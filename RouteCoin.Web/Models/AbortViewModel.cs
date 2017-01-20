@@ -12,6 +12,6 @@ namespace RouteCoin.Web.Models
         public string ContractState { get; set; }
         public string ContractAddress { get; set; }
         public string TransactionHash { get; set; }
-        public string AbortMessage { get; set; }
+        public string Message { get; set; }
     }
 }
