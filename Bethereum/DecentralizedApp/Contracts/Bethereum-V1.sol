@@ -20,7 +20,7 @@ contract RouteCoin {
     // Q: will this be with Ethers or we create a coin called RouteCoin?
     uint private contractPrice;
     
-    enum State { Created, Expired, Completed, Aborted }
+    enum State { Created, Expired, Completed, Aborted, RouteFound }
     State private state;
 
     function RouteCoin(address _finalDestination, uint _contractGracePeriod, uint _contractPrice) {
@@ -57,31 +57,44 @@ contract RouteCoin {
     }
 
     function destinationAddressRouteFound()
-        expired // contract must be in the Created state to be able to foundDestinationAddress
+        //expired // contract must be in the Created state to be able to foundDestinationAddress
         inState(State.Created)
+        returns (State)
     {
         seller = msg.sender;
         routeFound();
+        state = State.RouteFound;
+        return state;
     }
 
 
     function destinationAddressRouteConfirmed()
-        onlyBuyer  // only buyer can confirm the working route 
-        inState(State.Created)  // contract must be in the Created state to be able to confirmPurchase
-        payable
+        //onlyBuyer  // only buyer can confirm the working route 
+        inState(State.RouteFound)  // contract must be in the Created state to be able to confirmPurchase
+        //payable
+        returns (State)
     {
         routeAccepted();
         state = State.Completed;
-        if (!buyer.send(contractPrice))
-            throw;
+        //if (!buyer.send(contractPrice))
+        //    throw;
+        return state;
     }
 
     function abort()
-        onlyBuyer // only buyer can abort the contract
+        //onlyBuyer // only buyer can abort the contract
         inState(State.Created)  // contract must be in the Created state to be able to abort
+        returns (State)
     {
         aborted();
         state = State.Aborted;
+        return state;
+    }
+
+    function getState()
+        returns (State)
+    {
+        return state;
     }
 
     // Events

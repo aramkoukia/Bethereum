@@ -8,19 +8,12 @@
         <div class="row">
             <div class="col-md-6">
                 <p>
-                    <b>Transaction Hash:</b> 
-                    <br /> 
+                    <label for="SellerPublicKey">Transaction Hash:</label>
                     @Model.TransactionHash
                 </p>
+
                 <p>
-                    <b>Contract Address:</b> 
-                    <br /> 
-                    @Model.ContractAddress
-                </p>
-                <p>
-                    <b>Ether Scan Url:</b>
-                    <br />
-                    <a href="https://testnet.etherscan.io/address/@Model.ContractAddress" target="_blank">https://testnet.etherscan.io/address/@Model.ContractAddress</a>
+                    @Html.ActionLink("Show Contract Details", "ContractDetails", "Home", new { transactionHash = Model.TransactionHash }, null)
                 </p>
             </div>
 

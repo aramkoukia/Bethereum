@@ -1,0 +1,52 @@
+﻿@model RouteCoin.Web.Models.ContractDetailsModel
+ 
+<br />
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Contract Information</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="SellerPublicKey">Contract Address:</label>
+                @Model.ContractAddress
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="SellerPublicKey">Contract Balance:</label>
+                @Model.ContractBalance
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="SellerPublicKey">Ether Scan Url:</label>
+                <a href="https://testnet.etherscan.io/address/@Model.ContractAddress" target="_blank">https://testnet.etherscan.io/address/@Model.ContractAddress</a>
+            </div>
+        </div>
+        
+        <hr />
+
+        <div class="row">
+            <div class="col-md-6">
+                @Html.ActionLink("Get Contract State", "GetState", "Home", new { contractAddress = Model.ContractAddress }, null)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                @Html.ActionLink("Abort Contract", "Abort", "Home", new { contractAddress = Model.ContractAddress }, null)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.ActionLink("Destination Address Route Found", "DestinationAddressRouteFound", "Home", new { contractAddress = Model.ContractAddress }, null)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.ActionLink("Destination Address Route Confirmed", "DestinationAddressRouteConfirmed", "Home", new { contractAddress = Model.ContractAddress }, null)
+            </div>
+        </div>
+    </div>
+</div>
+

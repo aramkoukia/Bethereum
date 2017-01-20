@@ -203,6 +203,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\WhisperContractCreationViewModel.cs" />
+    <Compile Include="Models\GetStateViewModel.cs" />
+    <Compile Include="Models\DestinationAddressRouteFoundViewModel.cs" />
+    <Compile Include="Models\DestinationAddressRouteConfirmedViewModel.cs" />
+    <Compile Include="Models\AbortViewModel.cs" />
+    <Compile Include="Models\ContractDetailsModel.cs" />
     <Compile Include="Models\ContractCreatedModel.cs" />
     <Compile Include="Models\RouteCoinContractModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -247,6 +253,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Home\ContractCreated.cshtml" />
+    <Content Include="Views\Home\ContractDetails.cshtml" />
+    <Content Include="Views\Home\Abort.cshtml" />
+    <Content Include="Views\Home\DestinationAddressRouteConfirmed.cshtml" />
+    <Content Include="Views\Home\DestinationAddressRouteFound.cshtml" />
+    <Content Include="Views\Home\GetState.cshtml" />
+    <Content Include="Views\Home\WhisperContractCreationToNeigboors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
