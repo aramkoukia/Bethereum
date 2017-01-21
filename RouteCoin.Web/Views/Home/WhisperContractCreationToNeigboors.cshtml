@@ -48,33 +48,21 @@
               console.error(error);
     });
 
-    //var replyWatch = shh.watch({
-    //    "topic": [web3.fromAscii(appName), myIdentity],
-    //    "to": myIdentity
-    //},
-    //function (error, result) {
-    //    if (!error)
-    //        console.log(result)
-    //    else
-    //        console.error(error);
-    //});
+    var replyWatch = shh.filter({
+        "topic": [web3.fromAscii(appName), myIdentity],
+        "to": myIdentity
+    },
     //// could be "topic": [ web3.fromAscii(appName), null ] if we wanted to filter all such
     //// messages for this app, but we'd be unable to read the contents.
+    function (m) {
+        // new message m
+        console.log("Reply from " + web3.toAscii(m.payload) + " whose address is " + m.from);
+    });
 
-    //replyWatch.arrived(function (m) {
-    //    // new message m
-    //    console.log("Reply from " + web3.toAscii(m.payload) + " whose address is " + m.from);
-    //},
-    //function (error, result) {
-    //    if (!error)
-    //        console.log(result)
-    //    else
-    //        console.error(error);
-    //});
-
-    var broadcastWatch = shh.watch({ "topic": [web3.fromAscii(appName)] });
-
-    broadcastWatch.arrived(function (m) {
+    var broadcastWatch = shh.filter({
+        "topic": [web3.fromAscii(appName)]
+    },
+    function (m) {
         if (m.from != myIdentity) {
             // new message m: someone's asking for our name. Let's tell them.
             var broadcaster = web3.toAscii(m.payload).substr(0, 32);
