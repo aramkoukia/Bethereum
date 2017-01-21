@@ -21,16 +21,18 @@
 <script src="~/Scripts/web3.js"></script>
 <script type="text/javascript">
 
+    // get command needed
+    //geth --testnet --shh --rpc --rpcport 8545 --rpcaddr 0.0.0.0 --rpccorsdomain "*" --rpcapi "db,eth,net,web3,shh"
+
     var shh = web3.shh;
     var appName = "My silly app!";
     var myName = "Gav Would";
-    var myIdentity = '0x04c7813eab0f66dbe61e699c349d813c62269ceb41e3f2f20faf63a77c181dc7ce881344269ad82488f68824eedacf705eb6f9d3e2b1924ef1ae1de803137b1b8d';
-    //    shh.newIdentity(function (error, result) {
-    //    if (!error)
-    //        console.log(result)
-    //    else
-    //        console.error(error);
-    //});
+    var myIdentity = shh.newIdentity(function (error, result) {
+        if (!error)
+            console.log(result)
+        else
+            console.error(error);
+    });
 
     shh.post({
         "from": myIdentity,
@@ -38,21 +40,40 @@
         "payload": [web3.fromAscii(myName), web3.fromAscii("What is your name?")],
         "ttl": 100,
         "priority": 1000
+    },
+    function (error, result) {
+            if (!error)
+                console.log(result)
+           else
+              console.error(error);
     });
 
-    var replyWatch = shh.watch({
-        "topic": [web3.fromAscii(appName), myIdentity],
-        "to": myIdentity
-    });
-    // could be "topic": [ web3.fromAscii(appName), null ] if we wanted to filter all such
-    // messages for this app, but we'd be unable to read the contents.
+    //var replyWatch = shh.watch({
+    //    "topic": [web3.fromAscii(appName), myIdentity],
+    //    "to": myIdentity
+    //},
+    //function (error, result) {
+    //    if (!error)
+    //        console.log(result)
+    //    else
+    //        console.error(error);
+    //});
+    //// could be "topic": [ web3.fromAscii(appName), null ] if we wanted to filter all such
+    //// messages for this app, but we'd be unable to read the contents.
 
-    replyWatch.arrived(function (m) {
-        // new message m
-        console.log("Reply from " + web3.toAscii(m.payload) + " whose address is " + m.from);
-    });
+    //replyWatch.arrived(function (m) {
+    //    // new message m
+    //    console.log("Reply from " + web3.toAscii(m.payload) + " whose address is " + m.from);
+    //},
+    //function (error, result) {
+    //    if (!error)
+    //        console.log(result)
+    //    else
+    //        console.error(error);
+    //});
 
     var broadcastWatch = shh.watch({ "topic": [web3.fromAscii(appName)] });
+
     broadcastWatch.arrived(function (m) {
         if (m.from != myIdentity) {
             // new message m: someone's asking for our name. Let's tell them.
